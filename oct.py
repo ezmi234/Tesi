@@ -10,20 +10,46 @@ y = df.iloc[:, 4]
 (train_X, train_y), (test_X, test_y) = iai.split_data('classification', X, y,
                                                       seed=1)
 
-cart = iai.GridSearch(
+grid = iai.GridSearch(
     iai.OptimalTreeClassifier(
         random_seed=1,
         # criterion='gini',
     ),
     max_depth=5,
 )
-cart.fit(train_X, train_y)
-cart.get_learner()
+grid.fit(train_X, train_y)
+lnr = grid.get_learner()
+
+print(grid.get_grid_result_details())
+print(grid.get_grid_result_summary())
+
+# print the type of the learner
+print(type(lnr))
+
+# print the accuracy on the test set
+print(lnr.score(test_X, test_y))
+
+# print the accuracy on the training set
+print(lnr.score(train_X, train_y))
+
+# print the number of nodes in the tree
+print(lnr.get_num_nodes(), 'nodes')
+
+# print the depth of the tree
+print(lnr.get_depth(20), 'depth')
+
+print(lnr.get_parent(20), 'parent')
+print(lnr.get_lower_child(20), 'lower child')
+print(lnr.get_upper_child(20), 'upper child')
+print(lnr.is_leaf(20), 'leaf')
+
+
+
 
 # plot the decision tree
 
-plot = cart.get_learner().TreePlot()
-plot.show_in_browser()
+# plot = cart.get_learner().TreePlot()
+# plot.show_in_browser()
 
 # oct = iai.GridSearch(
 #     iai.OptimalTreeClassifier(
