@@ -44,7 +44,7 @@ bfs_tree(clf.tree_, X_train)
 
 # plot the decision tree
 plt.figure(figsize=(20, 12))
-tree.plot_tree(clf, feature_names=names, fontsize=8)
+tree.plot_tree(clf, feature_names=names, class_names=['0', '1'], fontsize=8)
 plt.show()
 
 y_pred = clf.predict(X_test)
