@@ -15,7 +15,8 @@ train_ratio = 0.5
 val_ratio = 0.25
 test_ratio = 0.25
 
-res_iai = pd.DataFrame(columns=['instance', 'depth', 'seed', 'train_acc', 'val_acc', 'test_acc', 'train_time'])
+res_iai = pd.DataFrame(columns=['instance', 'depth', 'seed', 'train_acc', 'val_acc', 'test_acc', 'train_time',
+                                'num_nodes'])
 
 for data in datasets:
     for d in depth:
@@ -38,9 +39,10 @@ for data in datasets:
             train_acc = best_model.score(train_X, train_y)
             val_acc = best_model.score(val_x, val_y)
             test_acc = best_model.score(test_X, test_y)
+            num_nodes = best_model.get_num_nodes()
 
             row = {'instance': data, 'depth': d, 'seed': s, 'train_acc': train_acc, 'val_acc': val_acc,
-                   'test_acc': test_acc, 'train_time': tock - tick}
+                   'test_acc': test_acc, 'train_time': tock - tick, 'num_nodes': num_nodes}
             res_iai = pd.concat([res_iai, pd.DataFrame([row])], ignore_index=True)
 
 res_iai.to_csv('./res/iai.csv', index=False)

@@ -38,11 +38,6 @@ print(lnr.get_num_nodes(), 'nodes')
 # print the depth of the tree
 print(lnr.get_depth(20), 'depth')
 
-print(lnr.get_parent(20), 'parent')
-print(lnr.get_lower_child(20), 'lower child')
-print(lnr.get_upper_child(20), 'upper child')
-print(lnr.is_leaf(20), 'leaf')
-
 
 
 
