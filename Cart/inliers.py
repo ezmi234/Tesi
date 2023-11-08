@@ -25,7 +25,7 @@ def bfs_tree(tree, X):
 
 names = ['En_count', 'O_Quant', 'R_Times', 'OTimes', 'OTimes_S', 'O_monthes', 'class']
 
-df = pd.read_csv("../data/inliners/inliers2.csv", skiprows=1, usecols=range(1, 8), header=None,
+df = pd.read_csv("../data/inliers/inliers2.csv", skiprows=1, usecols=range(1, 8), header=None,
                  names=names)
 
 X = df.iloc[:, 0:6]

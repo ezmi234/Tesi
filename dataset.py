@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-# author: Bo Tang
-
 import pandas as pd
 import numpy as np
-
 from sklearn.preprocessing import LabelBinarizer
 
+seed = 1
+train_ratio = 0.5
+overwrite = False
 def loadData(dataname):
     """
     load training and testing data from different dataset
@@ -46,6 +44,22 @@ def loadData(dataname):
     # monks
     if dataname[:5] == 'monks':
         x, y = loadMonks(dataname)
+        return x, y
+    # nath-jones
+    if dataname == 'nath-jones':
+        x, y = loadNathJones()
+        return x, y
+    # nath-jones-bin
+    if dataname == 'nath-jones-bin':
+        x, y = loadNathJonesBin()
+        return x, y
+    # inliers
+    if dataname == 'inliers':
+        x, y = loadInliers()
+        return x, y
+    # banknote-authentication
+    if dataname == 'banknote-authentication':
+        x, y = loadBanknoteAuthentication()
         return x, y
     raise NameError('No dataset "{}".'.format(dataname))
 
@@ -166,3 +180,40 @@ def loadMonks(dataname):
     y = np.concatenate((y_train, y_test), axis=0)
     x = oneHot(x)
     return x, y
+
+def loadNathJones():
+    """
+    load Nath-Jones dataset
+    """
+    df = pd.read_csv("./data/nath_jones/nath_jones.csv", skiprows=1, usecols=range(1, 6), header=None)
+    X = df.iloc[:, 0:4]
+    y = df.iloc[:, 4]
+    return X, y
+
+def loadNathJonesBin():
+    """
+    load Nath-Jones dataset
+    """
+    df = pd.read_csv("./data/nath_jones/nath_jones_bin.csv", skiprows=1, usecols=range(0, 4), header=None)
+    X = df.iloc[:, 0:3]
+    y = df.iloc[:, 3]
+    return X, y
+
+def loadInliers():
+    """
+    load inliers dataset
+    """
+    df = pd.read_csv("./data/inliers/inliers2.csv", skiprows=1, usecols=range(1, 8), header=None,
+                     names=['En_count', 'O_Quant', 'R_Times', 'OTimes', 'OTimes_S', 'O_monthes', 'class'])
+    X = df.iloc[:, 0:6]
+    y = df.iloc[:, 6]
+    return X, y
+
+def loadBanknoteAuthentication():
+    """
+    load banknote-authentication dataset
+    """
+    df = pd.read_csv("./data/banknote-authentication/banknote-authentication.txt", header=None)
+    X = df.iloc[:, 0:4]
+    y = df.iloc[:, 4]
+    return np.array(X), np.array(y)

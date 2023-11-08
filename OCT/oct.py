@@ -1,8 +1,8 @@
 from interpretableai import iai
 import pandas as pd
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
-df = pd.read_csv("data_banknote_authentication.txt", header=None,
+df = pd.read_csv("../data/banknote-authentication/banknote-authentication.txt", header=None,
                  names=['variance', 'skewness', 'curtosis', 'entropy', 'class'])
 
 X = df.iloc[:, 0:4]

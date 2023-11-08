@@ -6,8 +6,8 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 from scipy import stats
 
-df = pd.read_csv("data_banknote_authentication.txt", header=None,
-                    names=['variance', 'skewness', 'curtosis', 'entropy', 'class'])
+df = pd.read_csv("../data/banknote-authentication/banknote-authentication.txt", header=None,
+                 names=['variance', 'skewness', 'curtosis', 'entropy', 'class'])
 
 X = df.iloc[:, 0:4]
 y = df.iloc[:, 4]
